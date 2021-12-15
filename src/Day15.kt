@@ -44,7 +44,7 @@ fun main() {
             }
         }
 
-        return minRisks[minRisks.size - 1][minRisks[0].size - 1];
+        return minRisks[minRisks.size - 1][minRisks[0].size - 1]
     }
 
     fun part1(grid: Array<IntArray>): Int = lowestTotalRisk(1, grid)
