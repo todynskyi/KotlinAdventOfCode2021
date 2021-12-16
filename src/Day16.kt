@@ -63,7 +63,9 @@ fun main() {
 
     fun part2(packet: String): Long = parse(packet).value()
 
-    val input = readInput("Day16").first().map { it.digitToInt(16).toString(2).padStart(4, '0') }.joinToString("")
+    val input = readInput("Day16").first()
+        .map { it.digitToInt(16).toString(2).padStart(4, '0') }
+        .joinToString("")
 
     println(part1(input))
     println(part2(input))
@@ -84,11 +86,9 @@ class Operator(val version: Int, private val type: Int, bits: String, val packet
         1 -> packets.fold(1) { acc, packet -> acc * packet.value() }
         2 -> packets.minOf { it.value() }
         3 -> packets.maxOf { it.value() }
-        5 -> (packets[0].value() > packets[1].value()).toLong()
-        6 -> (packets[0].value() < packets[1].value()).toLong()
-        7 -> (packets[0].value() == packets[1].value()).toLong()
+        5 -> if (packets[0].value() > packets[1].value()) 1L else 0L
+        6 -> if (packets[0].value() < packets[1].value()) 1L else 0L
+        7 -> if (packets[0].value() == packets[1].value()) 1L else 0L
         else -> throw IllegalAccessException("Unsupported type $type")
     }
-
-    private fun Boolean.toLong() = if (this) 1L else 0L
 }
